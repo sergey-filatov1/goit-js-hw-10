@@ -15,10 +15,10 @@ function makeOrder(delay, shouldResolve) {
   });
 }
 
-function addOrderToLog(drink) {
+function addOrderToLog(drink, delay) {
   const item = document.createElement('li');
   item.classList.add('row-pending');
-  item.textContent = `${drink} — замовлення прийнято в роботу...`;
+  item.textContent = `☕ ${drink} · у роботі… · ${delay} ms`;
   orderLog.prepend(item);
 
   return item;
@@ -27,25 +27,26 @@ function addOrderToLog(drink) {
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  const { drink, state } = form.elements;
-  const drinkName = drink.value;
-  const shouldResolve = state.value === 'fulfilled';
-  const delay = PREP_TIME[drinkName];
+  const formData = new FormData(form);
+  const drink = formData.get('drink');
+  const state = formData.get('state');
+  const shouldResolve = state === 'fulfilled';
+  const delay = PREP_TIME[drink];
 
-  const item = addOrderToLog(drinkName);
+  const item = addOrderToLog(drink, delay);
 
   makeOrder(delay, shouldResolve)
     .then(() => {
       item.classList.remove('row-pending');
       item.classList.add('row-ok');
-      item.textContent = `${drinkName} — готово ☕`;
+      item.textContent = `✅ ${drink} · готове · ${delay} ms`;
     })
     .catch(() => {
       item.classList.remove('row-pending');
-      item.classList.add('row-error');
-      item.textContent = `${drinkName} — замовлення відхилено`;
+      item.classList.add('row-err');
+      item.textContent = `❌ ${drink} · скасовано · ${delay} ms`;
     })
     .finally(() => {
-      item.textContent += ` | ${new Date().toLocaleTimeString('uk-UA')}`;
+      item.textContent += ` · ${new Date().toLocaleTimeString('uk-UA')}`;
     });
 });

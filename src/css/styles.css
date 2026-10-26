@@ -90,6 +90,6 @@ body {
   border-left-color: #2e7d53;
 }
 
-.order-log li.row-error {
-  border-left-color: #e5484d;
+.order-log li.row-err {
+  border-left-color: #c8473b;
 }
