@@ -6,5 +6,90 @@
 
 body {
   margin: 0;
+  padding: 32px;
   font-family: system-ui, sans-serif;
+  color: #2e2f42;
+  background-color: #f8f9fd;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 320px;
+  margin-bottom: 24px;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form select,
+.form button {
+  font: inherit;
+}
+
+.form select {
+  min-width: 240px;
+  padding: 8px;
+}
+
+.form fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.form fieldset label {
+  flex-direction: row;
+  align-items: center;
+}
+
+.form button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #4e75ff;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background-color: #3559d8;
+}
+
+.order-log {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+  padding: 0;
+  list-style: none;
+}
+
+.order-log li {
+  padding: 12px 16px;
+  border: 1px solid #dbe2ea;
+  border-left: 4px solid #8a7a6d;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.order-log li.row-pending {
+  border-left-color: #8a7a6d;
+  color: #8a7a6d;
+}
+
+.order-log li.row-ok {
+  border-left-color: #2e7d53;
+}
+
+.order-log li.row-error {
+  border-left-color: #e5484d;
 }
